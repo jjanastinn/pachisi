@@ -1,0 +1,83 @@
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  } 
+  
+body, 
+p, 
+ul, 
+li
+  {
+    margin: 0;
+    padding: 0;
+  }  
+
+.title {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+#board {
+    background-color: lightgrey;
+    width: 550px;
+    margin: 0 auto;
+}
+
+.column {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.field {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.red {
+    border: 4px solid red;
+}
+
+.yellow {
+    border: 4px solid yellow;
+}
+
+.green {
+    border: 4px solid green;
+}
+
+.blue {
+    border: 4px solid blue;
+}
+
+.buttons {
+    text-align: right;
+    width: 550px;
+    margin: 0 auto;
+}
+
+button {
+    font-size: 30px;
+    color: #2a3031;
+    font-weight: lighter;
+    border-radius: 4px;
+    border-color: grey;
+    margin-top: 30px;
+    margin-left: 5px;
+}
+
+.dice-box {
+    width: 100px;
+    margin-left: 30%;
+    margin-top: -40px;
+}
+
+.dice {
+    width: 100%;
+}

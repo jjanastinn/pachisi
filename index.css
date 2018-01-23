@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.square {
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+}
+
+.starting-square {
+    float: left;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+}
+
+.cone4,
+.cone8,
+.cone12,
+.cone16 {
+    margin-right: 20px;
+}
+
+.cone1,
+.cone2,
+.cone3,
+.cone4,
+.red {
+    background-color: red;
+}
+
+.cone5,
+.cone6,
+.cone7,
+.cone8 {
+    background-color: green;
+}
+
+#dice {
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 130px;
+}
