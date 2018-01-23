@@ -14,12 +14,14 @@ function main() {
 
   var splashElement;
   var startGameButton;
+  var title;
+  var label;
   var input;
 
 
   var handleStartClick = function () {
-    if (input.value > 4 || input.value < 1) {
-      alert ('Please choose a number between 1 and 4!');
+    if (input.value > 4 || input.value < 2) {
+      alert ('Please choose a number between 2 and 4!');
     } else {
       destroySplash();
       buildGame();
@@ -27,7 +29,7 @@ function main() {
   };
 
 
-  buildSplash();
+  //buildSplash();
 
   function buildSplash() {
     stage = 'splash';
@@ -36,18 +38,23 @@ function main() {
     splashElement = document.createElement('div');
     splashElement.setAttribute('id', 'splash');
 
-    var title = document.createElement('h1');
+    title = document.createElement('h1');
+    title.setAttribute('class', 'title');
     title.innerText = 'PACHISI';
     splashElement.appendChild(title);
 
+    label = document.createElement('label');
+    label.setAttribute("class", "label");
+    label.innerText = 'PLAYER  NUMBER:';
+    splashElement.appendChild(label);
+
     input = document.createElement('input');
     input.setAttribute("type", "number");
-    input.setAttribute("name", "playerNumber");
-    input.setAttribute("value", "0");
+    input.setAttribute("class", "input");
     splashElement.appendChild(input);
 
     startGameButton = document.createElement('button');
-    startGameButton.innerText = 'start';
+    startGameButton.innerText = 'START';
     splashElement.appendChild(startGameButton);
 
     // apppend to site-main
@@ -73,12 +80,19 @@ function main() {
 
   // -- GAME
 
+  var gameElement;
   var randomNumber;
+  var title;
+  var wrapper;
+  var player;
+  var playerTurn;
+  var diceBox;
+  var dice;
+  var buttons;
   var buttonStart;
   var handleRestartClick;
   var buttonQuit;
   var handleGameOverClick;
-  var gameElement;
 
 
   handleRestartClick = function () {
@@ -94,25 +108,45 @@ function main() {
 
   function buildGame() {
     stage = 'game';
+    
+    createBoard();
     game = new Game(mainElement);
     game.getPlayerNumber(input);
-    game.firstTurn();
     game.getFields();
-    
+    //game.getStartingSquare();
+    game.firstTurn();
+    game.getTrack();
+    //game.switchTurns();
+
+
     // create dom elements
 
-    createBoard();
 
     function createBoard() {
 
-      var title = document.createElement('h1');
+      title = document.createElement('h1');
       title.setAttribute('class', 'title');
       title.innerText = 'PACHISI';
       mainElement.appendChild(title);
+
+      wrapper = document.createElement('div');
+      wrapper.setAttribute('class', 'wrapper');
+      mainElement.appendChild(wrapper);
       
+      player = document.createElement('div');
+      player.setAttribute('id', 'player');
+      wrapper.appendChild(player);
+
+      for (var i = 1; i <= input.value; i++) {
+        playerTurn = document.createElement('div');
+        playerTurn.setAttribute('class', 'player');
+        playerTurn.innerText = "PLAYER " + i;
+        player.appendChild(playerTurn);
+      }
+
       gameElement = document.createElement('div');
       gameElement.setAttribute('id', 'board');
-      mainElement.appendChild(gameElement);
+      wrapper.appendChild(gameElement);
       
       //board
       var row;
@@ -127,25 +161,10 @@ function main() {
       
       //row1
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green ss1 ss');
       document.querySelector('.row1').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
-      document.querySelector('.row1').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row1').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row1').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
-      document.querySelector('.row1').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
-      document.querySelector('.row1').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field green ss2 ss');
       document.querySelector('.row1').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -154,32 +173,32 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row1').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field 19 track');
       document.querySelector('.row1').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field 20 track');
+      document.querySelector('.row1').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field 21 blue track');
+      document.querySelector('.row1').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row1').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row1').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field blue ss1 ss');
+      document.querySelector('.row1').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field blue ss2 ss');
       document.querySelector('.row1').appendChild(column);
       //row2
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green ss3 ss');
       document.querySelector('.row2').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
-      document.querySelector('.row2').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row2').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row2').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
-      document.querySelector('.row2').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
-      document.querySelector('.row2').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field green ss4 ss');
       document.querySelector('.row2').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -188,10 +207,25 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row2').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field 18 track');
       document.querySelector('.row2').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field blue hc1');
+      document.querySelector('.row2').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field 22 track');
+      document.querySelector('.row2').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row2').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row2').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field blue ss3 ss');
+      document.querySelector('.row2').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field blue ss4 ss');
       document.querySelector('.row2').appendChild(column);
       //row3
       var column = document.createElement('div');
@@ -207,13 +241,13 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row3').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 17 track');
       document.querySelector('.row3').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field blue hc2');
       document.querySelector('.row3').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 23 track');
       document.querySelector('.row3').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -241,13 +275,13 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row4').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 16 track');
       document.querySelector('.row4').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field blue');
+      column.setAttribute('class', 'column field blue hc3');
       document.querySelector('.row4').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 24 track');
       document.querySelector('.row4').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -263,105 +297,105 @@ function main() {
       document.querySelector('.row4').appendChild(column);
       //row5
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green 11 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 12 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 13 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 14 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 15 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column field blue');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 25 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 26 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 27 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 28 track');
       document.querySelector('.row5').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 29 track');
       document.querySelector('.row5').appendChild(column);
       //row6
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 10 track');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green hc1');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green hc2');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green hc3');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field green');
+      column.setAttribute('class', 'column field green hc4');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field yellow hc4');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field yellow hc3');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field yellow hc2');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field yellow hc1');
       document.querySelector('.row6').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 30 track');
       document.querySelector('.row6').appendChild(column);
       //row7
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 9 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 8 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 7 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 6 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 5 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
+      column.setAttribute('class', 'column field red hc4');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 35 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 34 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 33 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 32 track');
       document.querySelector('.row7').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field yellow 31 track');
       document.querySelector('.row7').appendChild(column);
       //row8
       var column = document.createElement('div');
@@ -377,13 +411,13 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row8').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 4 track');
       document.querySelector('.row8').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
+      column.setAttribute('class', 'column field red hc3');
       document.querySelector('.row8').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 36 track');
       document.querySelector('.row8').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -411,13 +445,13 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row9').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 3 track');
       document.querySelector('.row9').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
+      column.setAttribute('class', 'column field red hc2');
       document.querySelector('.row9').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field 37 track');
       document.querySelector('.row9').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -433,25 +467,10 @@ function main() {
       document.querySelector('.row9').appendChild(column);
       //row10
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
+      column.setAttribute('class', 'column field red ss1 ss');
       document.querySelector('.row10').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
-      document.querySelector('.row10').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row10').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row10').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
-      document.querySelector('.row10').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
-      document.querySelector('.row10').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field red ss2 ss');
       document.querySelector('.row10').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -460,32 +479,32 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row10').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field 2 track');
       document.querySelector('.row10').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field red hc1');
+      document.querySelector('.row10').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field 38 track');
+      document.querySelector('.row10').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row10').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row10').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field yellow ss1 ss');
+      document.querySelector('.row10').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field yellow ss2 ss');
       document.querySelector('.row10').appendChild(column);
       //row11
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
+      column.setAttribute('class', 'column field red ss3 ss');
       document.querySelector('.row11').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
-      document.querySelector('.row11').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row11').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      document.querySelector('.row11').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field red');
-      document.querySelector('.row11').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
-      document.querySelector('.row11').appendChild(column);
-      var column = document.createElement('div');
-      column.setAttribute('class', 'column field');
+      column.setAttribute('class', 'column field red ss4 ss');
       document.querySelector('.row11').appendChild(column);
       var column = document.createElement('div');
       column.setAttribute('class', 'column');
@@ -494,14 +513,39 @@ function main() {
       column.setAttribute('class', 'column');
       document.querySelector('.row11').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field red 1 track');
       document.querySelector('.row11').appendChild(column);
       var column = document.createElement('div');
-      column.setAttribute('class', 'column field yellow');
+      column.setAttribute('class', 'column field 39 track');
+      document.querySelector('.row11').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field 40 track');
+      document.querySelector('.row11').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row11').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column');
+      document.querySelector('.row11').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field yellow ss3 ss');
+      document.querySelector('.row11').appendChild(column);
+      var column = document.createElement('div');
+      column.setAttribute('class', 'column field yellow ss4 ss');
       document.querySelector('.row11').appendChild(column);
       
+      //dice
+      diceBox = document.createElement('div');
+      diceBox.setAttribute('class', 'dice-box');
+      wrapper.appendChild(diceBox);
+      
+      dice = document.createElement('img');
+      dice.setAttribute('src', './img/dice1.jpg');
+      dice.setAttribute('class', 'dice');
+      diceBox.appendChild(dice);
+
       //buttons
-      var buttons = document.createElement('div');
+      buttons = document.createElement('div');
       buttons.setAttribute('class', 'buttons');
       mainElement.appendChild(buttons);
       
@@ -515,19 +559,9 @@ function main() {
       buttons.appendChild(buttonQuit);
       buttonQuit.addEventListener('click', handleGameOverClick);
       
-      //dice
-      var diceBox = document.createElement('div');
-      diceBox.setAttribute('class', 'dice-box');
-      mainElement.appendChild(diceBox);
-      
-      var dice = document.createElement('img');
-      dice.setAttribute('src', './img/dice1.jpg');
-      dice.setAttribute('class', 'dice');
-      diceBox.appendChild(dice);
     }
     
 
-    
     //functions
     dice.addEventListener('click', rollDice);
     function rollDice(){
@@ -554,8 +588,6 @@ function main() {
         }   
     }
 
-
-
   }
 
 
@@ -564,12 +596,13 @@ function main() {
     buttonQuit.removeEventListener('click', handleGameOverClick);
     // remove splash from dom
     gameElement.remove();
+    buttonQuit.remove();
+    buttonStart.remove();
+    title.remove();
+    diceBox.remove();
+    buttons.remove();
+    player.remove();
   }
-
-
-
-
-
 
 
 
@@ -582,7 +615,7 @@ function main() {
   var playAgainButton;
   var handlePlayAgainClick = function () {
     destroyGameOver();
-    buildGame();
+    buildSplash();
   };
 
   function buildGameOver() {
@@ -593,15 +626,12 @@ function main() {
     gameOverElement.setAttribute('id', 'game-over');
 
     var title = document.createElement('h1');
-    title.innerText = 'game over';
+    title.setAttribute('class', 'title');
+    title.innerText = 'GAME OVER';
     gameOverElement.appendChild(title);
 
-    var yourScore = document.createElement('h2');
-    yourScore.innerText = 'your score: ' + game.score;
-    gameOverElement.appendChild(yourScore);
-
     playAgainButton = document.createElement('button');
-    playAgainButton.innerText = 'play again';
+    playAgainButton.innerText = 'PLAY AGAIN';
     gameOverElement.appendChild(playAgainButton);
 
     // apppend to site-main
@@ -618,7 +648,7 @@ function main() {
     gameOverElement.remove();
   }
 
-  // buildSplash();
+  buildSplash();
 
 }
 
