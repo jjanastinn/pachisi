@@ -39,7 +39,7 @@ li
 }
 
 .wrapper {
-    display: flex;
+    text-align: center; /* all the children are inline block and will center just as if they were text */
 }
 
 #player {
@@ -47,17 +47,40 @@ li
     vertical-align: top;
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
-    flex: 0 0 20%;
+    padding: 20px;
 }
 
 .player {
     border: 1px solid black;
     border-radius: 4px;
     padding: 20px 30px;
-    margin: 20px;
+    margin-bottom: 20px;
     text-align: center;
     font-weight: lighter;
+    text-transform: uppercase;
 }
+
+
+.player.red.active {
+    background: red;
+    color: white;
+}
+
+.player.blue.active {
+    background: blue;
+    color: white;
+}
+
+.player.green.active {
+    background: green;
+    color: white;
+}
+
+.player.yellow.active {
+    background: yellow;
+    color: white;
+}
+
 
 #board {
     background-color: lightgrey;
@@ -73,6 +96,7 @@ li
     width: 40px;
     height: 40px;
     margin: 5px;
+    padding: 4px;
 }
 
 .field {
@@ -81,19 +105,19 @@ li
     border-radius: 20px;
 }
 
-.red {
+.field.red {
     border: 4px solid red;
 }
 
-.yellow {
+.field.yellow {
     border: 4px solid yellow;
 }
 
-.green {
+.field.green {
     border: 4px solid green;
 }
 
-.blue {
+.field.blue {
     border: 4px solid blue;
 }
 
@@ -116,9 +140,36 @@ button {
 }
 
 .dice-box {
-    flex: 0 0 20%;
+    display: inline-block;
+    padding: 20px;
+    width: 100px;
+    vertical-align: top;
 }
 
 .dice {
-    width: 40%;
+    width: 100%;
+}
+
+.cone.red {
+    height: 100%;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.cone.blue {
+    height: 100%;
+    border-radius: 50%;
+    background-color: blue;
+}
+
+.cone.green {
+    height: 100%;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.cone.yellow {
+    height: 100%;
+    border-radius: 50%;
+    background-color: yellow;
 }

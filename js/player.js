@@ -1,27 +1,42 @@
 'use strict';
 
-function Player(id) {
+function Player(color) {
     var self = this;
-    self.id = id;
-    self.startingCircle;
+    self.color = color;
     self.cones = [];
-    self.playerPosition;
-    self.turn = true;
-    self.startingSquare;
+    self.startingSquares = [];
 
     for (var i = 0; i < 4; i++) {
-        self.cones.push(new Cone(self.id + [i])); 
+        self.cones.push({
+            position: 0,
+            trackPosition: 0,
+            element: null
+        });
     }
 }
 
-// not tested
-Player.prototype.enableMovement = function() {
+Player.prototype.init = function() {
     var self = this;
-
-    if (self.turn === true) {
-        for (var i = 0; i < cones.length; i++) {
-            cone.gamePosition.addEventListener('click', cone.makeMove);
-            cone.gamePosition.removeEventListener('click', cone.makeMove);
-        }
+    
+    for (var i = 0; i < 4; i++) {
+        var coneElement = document.createElement('div');
+        coneElement.classList.add('cone');
+        coneElement.classList.add(self.color);
+        self.cones[i].element = coneElement;
+        self.startingSquares[i].appendChild(coneElement);
     }
-} 
+}
+
+
+Player.prototype.getMovableCones = function (number) {
+    var self = this; 
+    
+    // find out which cones can move
+    return self.cones.filter(function (cone) {
+        // if number < 6 && cone.position === 0 return false
+        // else if some other cone is "number" away from us return false
+        // else...
+        return true;
+    });
+};
+
