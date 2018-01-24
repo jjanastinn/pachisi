@@ -1,9 +1,9 @@
 'use strict';
 
-function Cone() {
+function Cone(id) {
     var self = this;
 
-    self.id;
+    self.id = id;
     self.position;
     self.gamePosition;
     self.startingSquare = true;
@@ -13,7 +13,7 @@ function Cone() {
 }
 
 
-
+// not tested
 Cone.prototype.enableCone = function() {
     var self = this;
     if (player.turn === true) {
@@ -23,14 +23,15 @@ Cone.prototype.enableCone = function() {
     }
 }
 
-
+// not tested
 Cone.prototype.makeMove = function() {
     var self = this;
     self.position += randomNumber;
-    calculateGamePosition();
+    self.drawCone();
+    // player.switchTurns();
 }
 
-
+// not tested
 Cone.prototype.calculateGamePosition = function() {
     var self = this;
     switch(player.id) {
@@ -49,9 +50,17 @@ Cone.prototype.calculateGamePosition = function() {
     } 
 }
 
+// not tested
+Cone.prototype.drawCone = function() {
+    var self = this;
 
+    gamePosition.removeAttribute('class', 'redCone');
+    self.calculateGamePosition();
+    gamePosition.setAttribute('class', 'redCone');
+}
 
+// setAttribute('class', id.split('').filter(function(letter){typeof(Number(letter)) === 'string'}))
 
-
+// R, E, D, 1
 
 

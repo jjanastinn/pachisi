@@ -1,48 +1,38 @@
 'use strict';
 
-function Game(mainElement) {
+function Game(mainElement, numberOfPlayers) {
     var self = this;
     self.mainElement = mainElement;
     self.players = [];
     self.turn;
     self.fields;
-}
-
-
-Game.prototype.getPlayerNumber = function(input) {
-    var self = this;
+    
     var possiblePlayers = ['RED', 'BLUE', 'GREEN', 'YELLOW']; //@ should be global
-    for (var i = 0; i < input.value; i++) {
+    for (var i = 0; i < numberOfPlayers; i++) {
         self.players.push(new Player (possiblePlayers[i]));
     }
 }
 
-var allFields;
 Game.prototype.getFields = function() {
     var self = this;
+    
+    var track;
+    var allFields;
     var fieldNodeList = document.querySelectorAll('.column');
     allFields = Array.from(fieldNodeList);
-}
-
-var track;
-Game.prototype.getTrack = function() {
-    var self = this;
     track = allFields.filter(field => field.classList.contains('track') === true);
-    // Why does not work??
-    // for (var i = 0; i < track.length; i++) {
-    //     var splitArray = track[i].split('.');
-    //     self.fields = track[i][2].push();
-    // }
 }
 
 
-// Why does not work??
-// var redStartingSquare;
-// var blueStartingSquare;
-// var greenStartingSquare;
-// var yellowStartingSquare;
+// Why does not work?? Where is every cone starting
 // Game.prototype.getStartingSquare = function() {
 //     var self = this;
+
+//     var redStartingSquare;
+//     var blueStartingSquare;
+//     var greenStartingSquare;
+//     var yellowStartingSquare;
+
 //     switch(self.players[i]) {
 //         case 'red':
 //             redStartingSquare = allFields.filter(field => field.classList.contains('ss') && field.classList.contains('red') === true);
@@ -62,6 +52,7 @@ Game.prototype.getTrack = function() {
 
 Game.prototype.firstTurn = function() {
     var self = this;
+
     var chooseFirst = (Math.floor(Math.random() * self.players.length));
     self.turn = self.players[chooseFirst];
 }
@@ -112,10 +103,10 @@ Game.prototype.firstTurn = function() {
 // }
 
 
-
 // destroy game
 Game.prototype.destroy = function() {
     var self = this;
+
     self.finished = true;
     self.gameElement.remove();
 };

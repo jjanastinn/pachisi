@@ -8,31 +8,20 @@ function Player(id) {
     self.playerPosition;
     self.turn = true;
     self.startingSquare;
-}
 
-
-// Why doesnt work?
-Player.prototype.createCones = function() {
-    var self = this;
-    for (var i = 0; i < game.players.length; i++) {
+    for (var i = 0; i < 4; i++) {
         self.cones.push(new Cone(self.id + [i])); 
     }
 }
 
-
+// not tested
 Player.prototype.enableMovement = function() {
     var self = this;
+
     if (self.turn === true) {
-        
+        for (var i = 0; i < cones.length; i++) {
+            cone.gamePosition.addEventListener('click', cone.makeMove);
+            cone.gamePosition.removeEventListener('click', cone.makeMove);
+        }
     }
 } 
-
-
-// Player.prototype.cones = function() {
-//     var self = this;
-//     self.id;
-//     self.position;
-//     self.gamePosition;
-//     self.startingSquare = true;
-// }
-
