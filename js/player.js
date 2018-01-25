@@ -62,10 +62,6 @@ Player.prototype.getMovableCones = function (number) {
         else {
             return true;
         }
-        // if number < 6 && cone.position === 0 return false
-        // if number === 6 && cone.position === 0 && self.hasConeAtPosition(1)return false
-        // else if some other cone is "number" away from us return false
-        // else...
     });
 };
 

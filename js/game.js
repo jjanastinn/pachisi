@@ -163,6 +163,12 @@ Game.prototype.enableCones = function (randomNumber) {
         var cone = currentPlayer.cones[index];
         console.log("move cone", index);
         currentPlayer.moveCone(index, randomNumber);
+
+        // for (var i = 0; i < self.players.length; i++) {
+        //    if (currentPlayer.cones[i].trackPosition === self.players[i].cones[i].trackPosition) {
+        //        return self.players[i].cones[i].trackPosition = self.players[i].cones[i].trackPosition;
+        //    }
+        // } why not working??
         
         if (cone.trackPosition === null) {
             cone.element.remove();
@@ -176,7 +182,13 @@ Game.prototype.enableCones = function (randomNumber) {
             item.element.classList.remove('enabled');
         });
         
-        self.nextTurn();
+        if (randomNumber !== 6) {
+            self.nextTurn();
+        } else {
+            self.currentPlayerNumber--;
+            self.nextTurn();
+        }
+
     } 
     
     // @temp
