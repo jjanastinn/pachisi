@@ -50,6 +50,15 @@ Player.prototype.getMovableCones = function (number) {
         else if (number === 6 && cone.position === 0 && self.hasConeAtPosition(1)) {
             return false;
         }
+        else if (number === 6 && cone.position !== 0 && self.hasConeAtPosition(0)) {
+            return false;
+        }
+        else if (self.hasConeAtPosition(cone.position + number)) {
+            return false;
+        }
+        else if (cone.position !== 1 && self.hasConeAtPosition(1) && self.hasConeAtPosition(0)) {
+            return false;
+        }
         else {
             return true;
         }

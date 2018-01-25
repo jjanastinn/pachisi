@@ -157,7 +157,7 @@ Game.prototype.enableCones = function (randomNumber) {
     var currentPlayer = self.players[self.currentPlayerNumber];
     var movableCones = currentPlayer.getMovableCones(randomNumber); 
 
-    
+
     function handleConeClick (evt) {
         var index = evt.target.getAttribute('data-index');
         var cone = currentPlayer.cones[index];
