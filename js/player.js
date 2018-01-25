@@ -22,8 +22,19 @@ Player.prototype.init = function() {
         var coneElement = document.createElement('div');
         coneElement.classList.add('cone');
         coneElement.classList.add(self.color);
+        coneElement.setAttribute('data-index', i);
         self.cones[i].element = coneElement;
         self.startingSquares[i].appendChild(coneElement);
+    }
+}
+
+Player.prototype.hasConeAtPosition = function(position) {
+    var self = this;
+
+    for (var i = 0; i < self.cones.length; i++) {
+        if (self.cones[i].position === position) {
+            return true;
+        }
     }
 }
 
@@ -33,10 +44,19 @@ Player.prototype.getMovableCones = function (number) {
 
     // find out which cones can move
     return self.cones.filter(function (cone) {
+        if (number < 6 && cone.position === 0) {
+            return false;
+        }
+        else if (number === 6 && cone.position === 0 && self.hasConeAtPosition(1)) {
+            return false;
+        }
+        else {
+            return true;
+        }
         // if number < 6 && cone.position === 0 return false
+        // if number === 6 && cone.position === 0 && self.hasConeAtPosition(1)return false
         // else if some other cone is "number" away from us return false
         // else...
-        return true;
     });
 };
 
