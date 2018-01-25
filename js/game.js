@@ -1,8 +1,8 @@
 'use strict';
 
 var ROLL_DICE_COUNT = 1;
-var ROLL_DICE_MS = 100;
-var ROLL_DICE_DELAY = 100;
+var ROLL_DICE_MS = 50;
+var ROLL_DICE_DELAY = 50;
 
 function Game(parentElement, numberOfPlayers) {
     var self = this;
@@ -145,6 +145,7 @@ Game.prototype.rollDice = function () {
         counter++;
         if (counter === ROLL_DICE_COUNT) {
             window.clearInterval(self.diceInterval);
+            randomNumber = 1; // @temp
             self.enableCones(randomNumber);
         }
     }, ROLL_DICE_MS);
@@ -153,12 +154,43 @@ Game.prototype.rollDice = function () {
 Game.prototype.enableCones = function (randomNumber) {
     var self = this;
 
-
     var currentPlayer = self.players[self.currentPlayerNumber];
-    var movableCones = currentPlayer.getMovableCones(randomNumber);
+    var movableCones = currentPlayer.getMovableCones(randomNumber); 
+
+    function handleConeClick (evt) {
+        var index = 0;
+        var cone = currentPlayer.cones[index];
+        console.log("move cone", index);
+        currentPlayer.moveCone(index, randomNumber);
+
+        if (cone.trackPosition === null) {
+            cone.element.remove();
+        }
+        else {
+            self.track[cone.trackPosition].appendChild(cone.element);
+        }
+
+        movableCones.forEach(function(item, index) {
+            item.element.removeEventListener('click', handleConeClick);
+            item.element.classList.remove('enabled');
+        });
+
+        self.nextTurn();
+    } 
+
+    // @temp
+    movableCones.forEach(function(item, index) {
+        item.element.addEventListener('click', handleConeClick);
+        item.element.classList.add('enabled');
+    })
+
+    // @temp
+    // window.setTimeout(function () {
+    //     handleConeClick();
+    // }, 0);
+
 
     console.log(movableCones);
-
 
     // add event listeners on element.cone for click on those
     // add a class "enabled" to element.clone

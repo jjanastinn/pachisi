@@ -56,7 +56,7 @@ var data = [
         {type: 'track', color: null, index: 13},
         {type: 'track', color: null, index: 14},
         {type: 'track', color: null, index: 15},
-        {type: 'home', color: 'blue', index: 53},
+        {type: 'home', color: 'blue', index: 52},
         {type: 'track', color: null, index: 25},
         {type: 'track', color: null, index: 26},
         {type: 'track', color: null, index: 27},

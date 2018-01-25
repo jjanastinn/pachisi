@@ -60,7 +60,6 @@ li
     text-transform: uppercase;
 }
 
-
 .player.red.active {
     background: red;
     color: white;
@@ -172,4 +171,17 @@ button {
     height: 100%;
     border-radius: 50%;
     background-color: yellow;
+}
+
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(10,10,10, 1);
+    }
+    100% {
+        box-shadow: 0 0 0 5px rgba(200,200,200, 0);
+    }
+}
+.cone.enabled {
+    animation: pulse 1s infinite;
 }
