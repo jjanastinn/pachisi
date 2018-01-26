@@ -42,12 +42,13 @@ function main() {
     splashElement.appendChild(label);
 
     input = document.createElement('input');
-    input.value = 4; // @temp
+    // input.value = 2; // @temp
     input.setAttribute("type", "number");
     input.setAttribute("class", "input");
     splashElement.appendChild(input);
 
     startGameButton = document.createElement('button');
+    startGameButton.setAttribute("class", "start-end");
     startGameButton.innerText = 'START';
     splashElement.appendChild(startGameButton);
 
@@ -57,7 +58,7 @@ function main() {
     // bind click on start play button
     startGameButton.addEventListener('click', handleStartClick);
 
-    handleStartClick();    // @temp
+    //handleStartClick();    // @temp
   }
 
   function destroySplash() {
@@ -149,6 +150,7 @@ function main() {
     gameOverElement.appendChild(title);
 
     playAgainButton = document.createElement('button');
+    playAgainButton.setAttribute("class", "start-end");
     playAgainButton.innerText = 'PLAY AGAIN';
     gameOverElement.appendChild(playAgainButton);
 

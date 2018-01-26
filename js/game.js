@@ -23,7 +23,6 @@ function Game(parentElement, numberOfPlayers) {
     self.createBoard();
     self.createDice();
 
-    // @todo loop all players and call player[ix].init()
     for (var ix = 0; ix < self.players.length; ix++) {
         self.players[ix].init();
     }
@@ -78,7 +77,6 @@ Game.prototype.createBoard = function() {
                 self.track[cellData.index] = cellElement;
             }
             if (cellData.type === 'ss') {
-                // @todo push th ss dom elements to the instance of player
                 var playerIndex = self.possiblePlayers.indexOf(cellData.color);
                 var player = self.players[playerIndex];
                 if (player) {
@@ -103,11 +101,8 @@ Game.prototype.createDice = function() {
 };
 
 
-// @todo nextTurn
 Game.prototype.nextTurn = function() {
     var self = this;
-
-    // @todo check if move possible
 
     self.currentPlayerNumber++;
 
@@ -163,19 +158,26 @@ Game.prototype.enableCones = function (randomNumber) {
         var cone = currentPlayer.cones[index];
         console.log("move cone", index);
         currentPlayer.moveCone(index, randomNumber);
+        
+        // if (cone.trackPosition === null) {
+        //     cone.element.remove();
+        // }
+        // else {
+        // }
+        self.track[cone.trackPosition].appendChild(cone.element);
 
         // for (var i = 0; i < self.players.length; i++) {
-        //    if (currentPlayer.cones[i].trackPosition === self.players[i].cones[i].trackPosition) {
-        //        return self.players[i].cones[i].trackPosition = self.players[i].cones[i].trackPosition;
-        //    }
-        // } why not working??
-        
-        if (cone.trackPosition === null) {
-            cone.element.remove();
-        }
-        else {
-            self.track[cone.trackPosition].appendChild(cone.element);
-        }
+        //     if (currentPlayer.cones[i].position > 40) {
+        //         alert('Game over!');
+        //     }
+        // }
+
+        // for (var i = 0; i < self.players.length; i++) {
+        //     if (currentPlayer.cones[i].trackPosition === self.players[i].cones[i].trackPosition) {
+        //         player.startingSquares[i].appendChild(self.turnElements.red);
+        //         //player.startingSquares[i].appendChild(self.players[i].cones[i].element);
+        //     }
+        // }
         
         movableCones.forEach(function(item, index) {
             item.element.removeEventListener('click', handleConeClick);
@@ -184,7 +186,12 @@ Game.prototype.enableCones = function (randomNumber) {
         
         if (randomNumber !== 6) {
             self.nextTurn();
-        } else {
+        } 
+        // else if (randomNumber !== 6 && currentPlayer.cones[0].position === 0 && currentPlayer.cones[1].position === 0 && currentPlayer.cones[2].position === 0 && currentPlayer.cones[3].position === 0) {
+        //     self.currentPlayerNumber--;
+        //     self.nextTurn();
+        // }
+        else {
             self.currentPlayerNumber--;
             self.nextTurn();
         }
@@ -206,7 +213,7 @@ Game.prototype.enableCones = function (randomNumber) {
     //     handleConeClick();
     // }, 0);
 
-    console.log(movableCones);
+    // console.log(movableCones);
 };
 
 

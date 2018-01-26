@@ -19,6 +19,7 @@ li
     font-family: 'Montserrat', sans-serif;
     font-size: 60px;
     font-weight: 400;
+    margin: 20px;
 }
 
 .label {
@@ -48,6 +49,7 @@ li
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     padding: 20px;
+    margin-left: -5%;
 }
 
 .player {
@@ -85,7 +87,7 @@ li
     background-color: lightgrey;
     border-radius: 4px;
     width: 610px;
-    margin: 0 auto 50px auto;
+    margin-bottom: 20px;
     display: inline-block;
     padding: 30px;
 }
@@ -127,8 +129,7 @@ li
 }
 
 button {
-    display: block;
-    margin: 10px auto;
+    margin: 10px;
     padding: 10px;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
@@ -136,6 +137,11 @@ button {
     color: #2a3031;
     border-radius: 4px;
     border-color: grey;
+}
+
+.start-end {
+    display: block;
+    margin: 0 auto;
 }
 
 .dice-box {
@@ -153,24 +159,28 @@ button {
     height: 100%;
     border-radius: 50%;
     background-color: red;
+    opacity: 0.6;
 }
 
 .cone.blue {
     height: 100%;
     border-radius: 50%;
     background-color: blue;
+    opacity: 0.6;
 }
 
 .cone.green {
     height: 100%;
     border-radius: 50%;
     background-color: green;
+    opacity: 0.6;
 }
 
 .cone.yellow {
     height: 100%;
     border-radius: 50%;
     background-color: yellow;
+    opacity: 0.6;
 }
 
 
@@ -182,6 +192,8 @@ button {
         box-shadow: 0 0 0 5px rgba(200,200,200, 0);
     }
 }
+
 .cone.enabled {
     animation: pulse 1s infinite;
+    opacity: 1;
 }
